@@ -9,7 +9,7 @@ const Login = (props) => {
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState();
-  const [enteredCollegeName, setEnteredCollegeName] = useState("");
+  const [enteredCollegeName, setEnteredCollegeName] = useState('');
   const [collegeNameIsValid, setCollegeNameIsValid] = useState();
 
   const [formIsValid, setFormIsValid] = useState(false);
