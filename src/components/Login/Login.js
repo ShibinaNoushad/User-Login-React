@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
 const emailreducer = (state, action) => {
   if (action.type === "USER_INPUT") {
     return { value: action.val, isValid: action.val.includes("@") };
@@ -36,12 +37,11 @@ const Login = (props) => {
     value: "",
     isValid: null,
   });
-
+  const authCtx = useContext(AuthContext);
 
   const [formIsValid, setFormIsValid] = useState(false);
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
-
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -50,8 +50,8 @@ const Login = (props) => {
     return () => {
       clearTimeout(identifier);
     };
-  }, [emailIsValid,passwordIsValid]);
-  
+  }, [emailIsValid, passwordIsValid]);
+
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
@@ -80,7 +80,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
